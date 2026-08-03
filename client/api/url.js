@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://notes-backend-seven-omega.vercel.app/api",
 });
 
 // Request interceptor: always attach token if present.

@@ -56,15 +56,6 @@ export const NoteProvider = ({ children }) => {
     // Auth: signup, login, logout
     const signup = async ({ username, email, password }) => {
         const resp = await API.post("/users/register", { username, email, password });
-        const newToken = resp.data.token;
-        if (newToken) {
-            localStorage.setItem("token", newToken);
-            // set header immediately so subsequent requests use it
-            API.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
-            setToken(newToken);
-            // load user's notes right away
-            await getNotes();
-        }
         return resp;
     };
 

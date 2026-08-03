@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { NoteContext } from "../context/NoteContext.jsx";
 
 const Signup = () => {
@@ -9,15 +9,13 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     try {
       await signup({ username, email, password });
-      navigate(from, { replace: true });
+      navigate("/login", { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || err.message || "Signup failed");
     }

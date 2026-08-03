@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import NotesCard from '../components/NotesCard.jsx'
 
 const Home = () => {
-  const { notes, loading} = useContext(NoteContext);
+  const { notes, loading, token } = useContext(NoteContext);
   
   if (loading) {
     return (
@@ -13,13 +13,23 @@ const Home = () => {
       </div>
     );
   }
-  if (notes.length === 0) {
+
+    if (!token) {
     return (
       <div className="flex items-center justify-center min-h-[60vh] px-4">
         <p className="text-2xl sm:text-4xl text-gray-600 text-center">Login to view your notes</p>
       </div>
     );
   }
+
+ if (notes.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh] px-4">
+        <p className="text-2xl sm:text-4xl text-gray-600 text-center">No notes found</p>
+      </div>
+    );
+  }
+
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6">
